@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 18:19:35 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/13 19:43:48 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/14 18:03:55 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,35 +70,47 @@ int	fil_remspace(t_tet *tet, char cur_fig[4][4], int *figure, int fig_num)
 {
 	int		x;
 	int		y;
-	int		n;
-	int		m;
 	t_tet	*temp;
 
 	temp = tet;
-	fil_remspace_y1(cur_fig, &x, &y);
+	if (fil_remspace_y1(cur_fig, &x, &y) != 1)
+		return (0);
 	while (temp != NULL)
 	{
-		n = 0;
-		while (n < x)
+		if ((temp->size_x == x) && (temp->size_y == y))
 		{
-			m = 0;
-			while (m < y)
+			if (fil_figure(temp, cur_fig) == 1)
 			{
-				if (cur_fig[n][m] != temp->tet[n][m])
-				{
-					n = 5;
-					m = 5;
-				}
-				m++;
+				figure[fig_num] = temp->id;
+				return (1);
 			}
-			n++;
-		}
-		if ((n == x) && (m == y) && (x == temp->size_x) && (y == temp->size_y))
-		{
-			figure[fig_num] = temp->id;
-			return (1);
 		}
 		temp = temp->next;
 	}
+	return (0);
+}
+
+int	fil_figure(t_tet *temp, char cur_fig[4][4])
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < temp->size_x)
+	{
+		y = 0;
+		while (y < temp->size_y)
+		{
+			if (cur_fig[x][y] != temp->tet[x][y])
+			{
+				x = 5;
+				y = 5;
+			}
+			y++;
+		}
+		x++;
+	}
+	if ((x == temp->size_x) && (y = temp->size_y))
+		return (1);
 	return (0);
 }

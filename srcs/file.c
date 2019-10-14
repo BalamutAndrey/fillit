@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 15:39:53 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/13 17:21:17 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/14 18:14:15 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,10 @@ int			fil_read(int fd, t_tet *tet)
 	{
 		c_tet = malloc(sizeof(char) * (20));
 		read_result = read(fd, c_tet, 20);
-		if (read_result != 20)
+		if ((read_result != 20) ||
+				(fil_checkcurr(tet, &c_tet[0], figure, fig_num) == 0))
 			return (0);
 		fig_num++;
-		if (fil_checkcurr(tet, &c_tet[0], figure, fig_num) == 0)
-			return (0);
 		free(c_tet);
 		c_tet = malloc(sizeof(char));
 		read_result = read(fd, c_tet, 1);
@@ -57,15 +56,6 @@ int			fil_read(int fd, t_tet *tet)
 			return (0);
 		free(c_tet);
 	}
-	ft_putnbr(fig_num + 1);
-	ft_putstr(" - ok, 20=1-...-20-0\n");
-	int i = 0;
-	while (i <= 24)
-	{
-		ft_putnbr(figure[i]);
-		ft_putstr(", ");
-		i++;
-	}
-	ft_putchar('\n');
+	ft_putstr("ok.\n");
 	return (1);
 }
