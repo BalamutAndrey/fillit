@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 18:19:35 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/14 18:03:55 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/14 18:32:24 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	fil_remspace(t_tet *tet, char cur_fig[4][4], int *figure, int fig_num)
 	t_tet	*temp;
 
 	temp = tet;
-	if (fil_remspace_y1(cur_fig, &x, &y) != 1)
+	if ((fig_num > 25) || (fil_remspace_y1(cur_fig, &x, &y) != 1))
 		return (0);
 	while (temp != NULL)
 	{

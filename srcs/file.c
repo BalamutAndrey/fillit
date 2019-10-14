@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 15:39:53 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/14 18:14:15 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/14 18:32:02 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ int			fil_read(int fd, t_tet *tet)
 	{
 		c_tet = malloc(sizeof(char) * (20));
 		read_result = read(fd, c_tet, 20);
+		fig_num++;
 		if ((read_result != 20) ||
 				(fil_checkcurr(tet, &c_tet[0], figure, fig_num) == 0))
 			return (0);
-		fig_num++;
 		free(c_tet);
 		c_tet = malloc(sizeof(char));
 		read_result = read(fd, c_tet, 1);
