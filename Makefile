@@ -6,7 +6,7 @@
 #    By: eboris <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/30 15:16:46 by eboris            #+#    #+#              #
-#    Updated: 2019/10/13 19:06:11 by eboris           ###   ########.fr        #
+#    Updated: 2019/10/20 18:43:24 by eboris           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fillit
 FLAGS = -Wall -Wextra -Werror
 HEADERS = ./srcs/
 SRC_PATH = ./srcs/
-SRC = $(SRC_PATH)main.c $(SRC_PATH)file.c $(SRC_PATH)list.c $(SRC_PATH)tetlist.c $(SRC_PATH)checktet.c $(SRC_PATH)remspace_y.c $(SRC_PATH)remspace_x.c
+SRC = $(SRC_PATH)main.c $(SRC_PATH)file.c $(SRC_PATH)list.c $(SRC_PATH)tetlist.c $(SRC_PATH)checktet.c $(SRC_PATH)remspace_y.c $(SRC_PATH)remspace_x.c $(SRC_PATH)createmap.c $(SRC_PATH)writemap.c
 LIB_NAMES = libft.a
 LIBFT_PATH = ./libft/
 

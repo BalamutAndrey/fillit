@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file.h                                             :+:      :+:    :+:   */
+/*   writemap.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/09 17:22:16 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/20 18:38:58 by eboris           ###   ########.fr       */
+/*   Created: 2019/10/20 18:39:57 by eboris            #+#    #+#             */
+/*   Updated: 2019/10/20 18:55:53 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FILE_H
-# define FILE_H
+#ifndef WRITEMAP_H
+# define WRITEMAP_H
 
 # include "main.h"
-# include "tetlist.h"
-# include "checktet.h"
-# include "createmap.h"
 
-int	fil_open(char *filename);
-int	fil_read(int fd, t_tet *tet);
+int	fil_write(t_tet *tet, char map[105][105]);
+
 #endif

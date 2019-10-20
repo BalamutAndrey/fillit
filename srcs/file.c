@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 15:39:53 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/14 18:32:02 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/20 18:37:43 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,5 @@ int			fil_read(int fd, t_tet *tet)
 			return (0);
 		free(c_tet);
 	}
-	ft_putstr("ok.\n");
-	return (1);
+	return (fil_new_map(tet, figure, fig_num));
 }
