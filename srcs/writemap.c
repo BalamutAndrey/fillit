@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 17:53:59 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/21 23:09:06 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/21 23:45:52 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	fil_write(t_tet *tet, char map[105][105], int figure)
 				map[0][100] = figure;
 				map[0][101] = x;
 				map[0][102] = y;
-				if (fil_write_figure(tet, map) == 1)
+				if (fil_write_figure(tet, map, x, y) == 1)
 					return (1);
 			}
 		x++;
@@ -39,13 +39,14 @@ int	fil_write(t_tet *tet, char map[105][105], int figure)
 	return (0);
 }
 
-int fil_write_check(t_tet *tet, char map[105][105], int x, int y)
+int	fil_write_check(t_tet *tet, char map[105][105], int x, int y)
 {
 	int	n;
 	int	m;
 
 	n = 0;
-	if (((x + tet->size_x - 1) > map[0][0]) || ((y + tet->size_y - 1) > map[0][0]))
+	if (((x + tet->size_x - 1) > map[0][0]) ||
+			((y + tet->size_y - 1) > map[0][0]))
 		return (0);
 	while (n <= tet->size_x)
 	{
@@ -61,73 +62,70 @@ int fil_write_check(t_tet *tet, char map[105][105], int x, int y)
 	return (1);
 }
 
-int	fil_write_figure(t_tet *tet, char map[105][105])
+int	fil_write_figure(t_tet *tet, char map[105][105], int x, int y)
 {
-	t_tet	*temp;
-	int		n;
 	int		m;
-	int		x;
-	int		y;
+	int		n;
 	char	tempmap[105][105];
 
-	x = 0;
-	while (x < 105)
+	m = 0;
+	while (m < 105)
 	{
-		y = 0;
-		while (y < 105)
+		n = 0;
+		while (n < 105)
 		{
-			tempmap[x][y] = map[x][y];
-			y++;
+			tempmap[m][n] = map[m][n];
+			n++;
 		}
-		x++;
+		m++;
 	}
+	return (fil_write_figure_2(tet, tempmap, x, y));
+}
+
+int	fil_write_figure_2(t_tet *tet, char map[105][105], int x, int y)
+{
+	t_tet	*temp;
+	int		m;
+	int		n;
 
 	temp = tet;
-	x = map[0][100];
-	y = map[0][2 + x];
-	while (temp->id != y)
+	m = map[0][100];
+	n = map[0][2 + m];
+	while (temp->id != n)
 		temp = temp->next;
-	n = map[0][101];
-	m = map[0][102];
-	x = 0;
-	while (x < temp->size_x)
+	m = 0;
+	while (m < temp->size_x)
 	{
-		y = 0;
-		while (y < temp->size_y)
+		n = -1;
+		while (++n < temp->size_y)
+			if (temp->tet[m][n] == '#')
+				map[x + m][y + n] = 'A' + map[0][100];
+		m++;
+	}
+	m = map[0][100];
+	if (map[0][2 + m + 1] == 0)
+		return (fil_print(map));
+	if (fil_write(tet, map, m + 1) == 0)
+		return (0);
+	return (1);
+}
+
+int	fil_print(char map[105][105])
+{
+	int	x;
+	int	y;
+
+	x = 1;
+	while (x <= map[0][0])
+	{
+		y = 1;
+		while (y <= map[0][0])
 		{
-			if (temp->tet[x][y] == '#')
-			{
-				tempmap[n + x][m + y] = 'A' + map[0][100];
-			}
+			ft_putchar(map[x][y]);
 			y++;
 		}
+		ft_putchar('\n');
 		x++;
-	}
-	x = map[0][100];
-	y = map[0][2 + x + 1];
-	if (y != 0)
-	{
-		if (fil_write(tet, tempmap, x + 1) == 0)
-			return (0);
-	}
-	else
-	{
-		x = 1;
-		while (x <= map[0][0])
-		{
-			y = 1;
-			while (y <= map[0][0])
-			{
-				ft_putchar(tempmap[x][y]);
-				y++;
-			}
-			ft_putchar('\n');
-			x++;
-		}
-//		ft_putchar('\n');
-//		ft_putstr("\n map_size = ");
-//		ft_putnbr(map[0][0]);
-//		ft_putchar('\n');
 	}
 	return (1);
 }
