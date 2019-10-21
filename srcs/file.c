@@ -6,7 +6,7 @@
 /*   By: eboris <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/09 15:39:53 by eboris            #+#    #+#             */
-/*   Updated: 2019/10/20 18:37:43 by eboris           ###   ########.fr       */
+/*   Updated: 2019/10/21 22:37:50 by eboris           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int			fil_open(char *filename)
 		return (0);
 	if ((fil_tetlist(tet) != 1) && (fil_checklist(tet) != 1))
 		return (0);
-	fil_read(fd, tet);
-	return (1);
+	return (fil_read(fd, tet));
 }
 
 int			fil_read(int fd, t_tet *tet)
